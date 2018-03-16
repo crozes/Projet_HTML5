@@ -4,7 +4,6 @@ var infopos = "Position déterminée :\n";
 function maPosition(position) {
 	infopos += "Latitude : " + position.coords.latitude +"\n";
 	infopos += "Longitude: " + position.coords.longitude+"\n";
-	infopos += "Altitude : " + position.coords.altitude +"\n";
 	document.getElementById("infoposition").append(infopos);
 
 	var uluru = {lat: position.coords.latitude, lng: position.coords.longitude};
