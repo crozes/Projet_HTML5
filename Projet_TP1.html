@@ -2,8 +2,36 @@
 <html>
 <head>
 	<title>Projet HTML5</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="mySteel.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-<p>Hello, World!</p>
+	<h1>Canvas API - Geolocalisation API</h1>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">Geolocalisation</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-md-12 text-center">
+				<div class="thumbnail">
+					<canvas id="canvas1" width="200" height="200"></canvas>
+					<div class="caption">
+						<h3>Paris</h3>
+						<p id="queHoraEs"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	<canvas id="canvas" width="200" height="200"
+	style="background-color:#333">
+</canvas>
+
+<script type="text/javascript" src="./scriptClock1.js"></script>
 </body>
 </html>
