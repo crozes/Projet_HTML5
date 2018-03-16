@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Projet HTML5</title>
+	<meta charset="utf-8">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="mySteel.css">
@@ -12,7 +13,10 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 text-center">Geolocalisation</div>
+			<div id="infoposition" class="col-md-12 text-center">
+				<h3 id="title">Position : </h3>
+				<div style="height:500px; width:100%;" id="map"></div>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-6 col-md-12 text-center">
@@ -26,12 +30,56 @@
 			</div>
 		</div>
 	</div>
-	
-
-	<canvas id="canvas" width="200" height="200"
-	style="background-color:#333">
 </canvas>
 
 <script type="text/javascript" src="./scriptClock1.js"></script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnLj1ynXMCCRUVOdadCVu1HT24ZSrNP0I&callback=initMap">
+</script>
+<script type="text/javascript">
+	var x = document.getElementById("title");
+	var infopos = "Position déterminée :\n";
+
+	function maPosition(position) {
+		infopos += "Latitude : " + position.coords.latitude +"\n";
+		infopos += "Longitude: " + position.coords.longitude+"\n";
+		infopos += "Altitude : " + position.coords.altitude +"\n";
+		document.getElementById("infoposition").append(infopos);
+
+		var uluru = {lat: position.coords.latitude, lng: position.coords.longitude};
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 13,
+			center: uluru
+		});
+		var marker = new google.maps.Marker({
+			position: uluru,
+			map: map
+		});
+	}
+
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(maPosition, showError);
+	} else {
+		x.innerHTML = "Geolocation n'est pas supporté par ce navigateur.";
+	}
+
+	function showError(error) {
+		switch(error.code) {
+			case error.PERMISSION_DENIED:
+			x.innerHTML = "User denied the request for Geolocation."
+			break;
+			case error.POSITION_UNAVAILABLE:
+			x.innerHTML = "Location information is unavailable."
+			break;
+			case error.TIMEOUT:
+			x.innerHTML = "The request to get user location timed out."
+			break;
+			case error.UNKNOWN_ERROR:
+			x.innerHTML = "An unknown error occurred."
+			break;
+		}
+	}
+
+</script>
 </body>
 </html>
